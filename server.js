@@ -17,11 +17,6 @@ const formRoutes = require('./routes/form');
 //app
 const app = express();
 
-//cors
-if (process.env.NODE_ENV === 'development') {
-  app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
-}
-
 //database
 mongoose
   .connect(process.env.DATABASE_LOCAL, {})
@@ -32,6 +27,10 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//cors
+if (process.env.NODE_ENV === 'development') {
+  app.use(cors({ origin: `${process.env.CLIENT_URL}` }));
+}
 // routes middeware
 
 app.use('/api', blogRoutes);
